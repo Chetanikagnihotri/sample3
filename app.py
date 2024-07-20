@@ -17,4 +17,4 @@ class FaceDetectionTransformer(VideoTransformerBase):
         return img
 
 st.title("Real-time Face Detection")
-webrtc_streamer(key="example", video_transformer_factory=FaceDetectionTransformer)
+webrtc_streamer(key="example", video_processor_factory=FaceDetectionTransformer)
