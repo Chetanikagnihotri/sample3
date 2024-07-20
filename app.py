@@ -30,25 +30,9 @@ class EmotionDetector(VideoTransformerBase):
 
 def main():
     st.title("Real-time Emotion Detection")
-    st.write("Upload a video file or use your webcam for real-time emotion detection.")
+    st.write("Use your webcam for real-time emotion detection.")
 
-    uploaded_file = st.file_uploader("Choose a video file", type=["mp4", "avi", "mov", "mkv"])
-    use_webcam = st.checkbox("Use webcam")
-
-    if uploaded_file is not None:
-        tfile = tempfile.NamedTemporaryFile(delete=False)
-        tfile.write(uploaded_file.read())
-        video = cv2.VideoCapture(tfile.name)
-        if not video.isOpened():
-            st.error("Error: Could not open video file.")
-            return
-        process_video(video)
-
-    elif use_webcam:
-        webrtc_streamer(key="example", video_transformer_factory=EmotionDetector)
-
-    else:
-        st.write("Please upload a video file or select the webcam option.")
+    webrtc_streamer(key="example", video_transformer_factory=EmotionDetector)
 
 if __name__ == '__main__':
     main()
