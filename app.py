@@ -2,7 +2,7 @@ import cv2
 import streamlit as st
 from deepface import DeepFace
 import tempfile
-
+import os
 
 face_cascade = cv2.CascadeClassifier(os.path.join(cv2.data.haarcascades, 'haarcascade_frontalface_default.xml'))
 
