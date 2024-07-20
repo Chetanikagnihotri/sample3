@@ -2,7 +2,6 @@ import cv2
 import streamlit as st
 from deepface import DeepFace
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
-import tempfile
 import os
 
 face_cascade = cv2.CascadeClassifier(os.path.join(cv2.data.haarcascades, 'haarcascade_frontalface_default.xml'))
@@ -28,18 +27,6 @@ class EmotionDetector(VideoTransformerBase):
             cv2.putText(img, emotion, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
         return img
-
-def process_video(video):
-    stframe = st.empty()
-    while video.isOpened():
-        ret, frame = video.read()
-        if not ret:
-            break
-        frame = analyze_emotions(frame)
-        stframe.image(frame, channels="BGR")
-
-    video.release()
-    cv2.destroyAllWindows()
 
 def main():
     st.title("Real-time Emotion Detection")
