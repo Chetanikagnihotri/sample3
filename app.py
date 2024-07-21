@@ -5,6 +5,7 @@ import av
 import cv2
 from deepface import DeepFace
 import tempfile
+import time
 
 st.title("Real-time Emotion Detection")
 
@@ -51,6 +52,9 @@ def analyze_emotions_in_video(uploaded_file):
         ret, frame = video.read()
         if not ret:
             break
+
+        # Introduce a slight delay to reduce lag
+        time.sleep(0.03)
         
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         rgb_frame = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
